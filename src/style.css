@@ -61,6 +61,8 @@ body{
     grid-template-columns: 5% auto 5% 10% 10%;
     transition: ease-in-out 200ms;
     position: relative;
+    padding: 5px;
+    background-color: ghostwhite;
 }
 #wrapper #main #container #view #thead div{
     font-size: 8px;
@@ -76,5 +78,30 @@ body{
 }
 #wrapper #main #container #view .todoContainer .more{
     position: absolute;
-    right:-3%
+    right:-5px;
+    padding:5px;
 }
+#wrapper #main #container #view .todoContainer .menu{
+    position:absolute;
+    overflow: hidden;
+    right:0px;
+    transition:ease-in-out 200ms;
+    max-width: 0px;
+    white-space: nowrap;
+}
+#wrapper #main #container #view .todoContainer .menu button{
+    font-size: 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    height:25px;
+}
+#wrapper #main #container #view .todoContainer .menu .delete{
+    background-color: red;
+    color:white;
+}
+#wrapper #main #container #view .todoContainer .menu .edit{
+    background-color: var(--items-color);
+    color: var(--txt-color1);
+}
+
