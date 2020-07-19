@@ -49,9 +49,32 @@ body{
 #wrapper #main #container #view{
     min-height: 50vh;
     background-color: ghostwhite;
+    padding: 10px 5%;
 }
 #wrapper #main #sidebar{
     background-color: var(--items-color);
     width: 20%;
     border-radius: 10px;
+}
+#wrapper #main #container #view .todoContainer, #wrapper #main #container #view #thead{
+    display: grid;
+    grid-template-columns: 5% auto 5% 10% 10%;
+    transition: ease-in-out 200ms;
+    position: relative;
+}
+#wrapper #main #container #view #thead div{
+    font-size: 8px;
+    text-align: center;
+}
+
+#wrapper #main #container #view .todoContainer .todoCreatedAt{
+    font-size: 0.5em;
+    text-align: center;
+}
+#wrapper #main #container #view .todoContainer .priority{
+   text-align: center;
+}
+#wrapper #main #container #view .todoContainer .more{
+    position: absolute;
+    right:-3%
 }
