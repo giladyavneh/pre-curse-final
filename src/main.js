@@ -67,10 +67,41 @@ function addItem(){
         more.className="more"
         more.innerText=":"
         container.appendChild(more)
-        //appending it all to the actual page
+        //appending it all to the actual page, by the priority
         target.appendChild(container)
         target.appendChild(document.createElement("hr"))
         input.value=""
+        //updating th counter
         updateCounter()
     }
+}
+
+//a function for turning the time stamp as printed to the todo list, into numbers
+//for time comperrasions
+function turnDateToNumber(stamp){
+    //turning the inner text to a list of numbers(as strings)
+    let nums=stamp.innerHTML.match(/\d+(?=(-|:|<br>|$))/g)
+    let result=0
+    //adding the numbers, giving more importance to bigger time units by multypling by exponents of 10
+    for (let i=0;i<nums.length;i++){
+        let n=parseInt(nums[i])*(10**(nums.length-i))
+        result+=n
+    }
+    return result
+}
+
+function sortByPriority(){
+    const target=document.getElementById("view")
+    let kids=target.children
+    for (let i=0;i<kids.length;i++){
+        if (kids[i].querySelector(".todoPriority")!=null){
+            if(parseInt(kids[i].querySelector(".todoPriority").innerText)>parseInt(prior.value)){
+                target.insertBefore(document.createElement("hr"),kids[i])
+                target.insertBefore(container,kids[i])
+                break
+            }
+        }
+        
+    }
+    
 }
