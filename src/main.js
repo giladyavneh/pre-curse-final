@@ -21,15 +21,7 @@ function addItem(){
         //This if statement bellow creates the header for the to do list.
         //I would rather hard code it, but it will break the 'list should start off empty' test
         if (target.innerHTML==""){
-            let header=document.createElement("div")
-            header.id="thead"
-            for (let x of ["status","task","priority","created","due"]){
-                let div=document.createElement("div")
-                div.innerText=x
-                header.appendChild(div)
-            }
-            target.appendChild(header)
-            target.appendChild(document.createElement("hr"))
+            headerCreator()
         }
         container.className="todoContainer"
         //creating the checkbox element
@@ -90,18 +82,33 @@ function turnDateToNumber(stamp){
     return result
 }
 
+function headerCreator(){
+    let target=document.getElementById("view")
+    let header=document.createElement("div")
+    header.id="thead"
+    for (let x of ["status","task","priority","created","due"]){
+        let div=document.createElement("div")
+        div.innerText=x
+        header.appendChild(div)
+    }
+    target.appendChild(header)
+    target.appendChild(document.createElement("hr"))
+}
+
 function sortByPriority(){
     const target=document.getElementById("view")
     let kids=target.children
+    let repo=[]
     for (let i=0;i<kids.length;i++){
         if (kids[i].querySelector(".todoPriority")!=null){
-            if(parseInt(kids[i].querySelector(".todoPriority").innerText)>parseInt(prior.value)){
-                target.insertBefore(document.createElement("hr"),kids[i])
-                target.insertBefore(container,kids[i])
-                break
-            }
-        }
-        
+            repo.push(kids[i]) 
+        }   
     }
-    
+    repo.sort(function(a, b){return b.querySelector(".todoPriority").innerText-a.querySelector(".todoPriority").innerText})
+    target.innerHTML=""
+    headerCreator()
+    repo.forEach(function(elem){
+        target.appendChild(elem)
+        target.appendChild(document.createElement("hr"))
+    })
 }
