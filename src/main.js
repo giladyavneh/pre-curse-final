@@ -1,4 +1,18 @@
-document.onload=updateCounter()
+document.onload=load()
+
+function load(){
+    if (localStorage.listName!=null){
+        headerCreator()
+        let target=document.getElementById("view")
+        let storage=JSON.parse(localStorage.listName)
+        for (item in storage){
+            target.innerHTML+=storage[item]
+            target.appendChild(document.createElement("hr"))
+        }
+    }
+    sortByCreationTime()
+    updateCounter()
+}
 document.addEventListener("mousedown",function(e){
     let item=e.target.closest(".todoContainer")
     if (item===null||e.target.tagName=="BUTTON"||e.target.className=="more"){return}
@@ -170,6 +184,7 @@ function addItem(){
         let more=document.createElement("div")
         more.className="more"
         more.innerText=":"
+        more.setAttribute("onclick","showMore(this)")
         more.addEventListener("click",showMore)
         more.style.cursor="pointer"
         container.appendChild(more)
@@ -179,7 +194,8 @@ function addItem(){
         let del=document.createElement("button")
         del.className="delete"
         del.innerText="DELETE"
-        del.addEventListener("click",deleteItem)
+        del.setAttribute("onclick","deleteItem(this)")
+        
         let edit=document.createElement("button")
         edit.className="edit"
         edit.innerText="EDIT"
@@ -189,13 +205,18 @@ function addItem(){
         //appending it all to the actual page, by the priority
         target.appendChild(container)
         target.appendChild(document.createElement("hr"))
-        input.value=""
         due.value=null
         //updating th counter
         updateCounter()
         if (localStorage.listName==null){
-            localStorage.listName=""
+            localStorage.listName="{}"
         }
+        let storage=JSON.parse(localStorage["listName"])
+        storage[input.value]=container.outerHTML
+        console.log(storage)
+        localStorage["listName"]=JSON.stringify(storage)
+        input.value=""
+        
         
     }
 }
@@ -257,8 +278,8 @@ function sortByPriority(){
     })
 }
 
-function showMore(e){
-    let button=e.target
+function showMore(that){
+    let button=that
     let item=button.parentElement
     let menu=item.querySelector(".menu")
     if(button.getAttribute("open")=="true"){
@@ -326,9 +347,10 @@ function sortByDueTime(){
     })
 }
 
-function deleteItem(e){
-    let button=e.target;
+function deleteItem(that){
+    let button=that;
     let item=button.parentElement.parentElement;
+    let key=item.querySelector(".todoText").innerText
     let target=document.getElementById("view");
     let kids=target.children;
     let hr=item.nextElementSibling;
@@ -356,5 +378,9 @@ function deleteItem(e){
             x.style.transform="translateY(0px)"})
         updateCounter()
     },200)
+    //remove it from the localStorage
+    let storage=JSON.parse(localStorage.listName)
+    delete storage[key]
+    localStorage.listName=JSON.stringify(storage)
 }
 
