@@ -1,18 +1,43 @@
+let current;
 document.onload=load()
 
 function load(){
-    if (localStorage.listName!=null){
+    if (localStorage.length===0){
+        createNewList()
+    }
+    else{
+        let lists=Object.keys(localStorage)
+        current=lists[0]
+        let sidebar=document.getElementById("sidebar")
+        let plusSign=document.getElementById("newList")
+        lists.forEach(
+            function(name){
+            let div=document.createElement("div")
+            div.className="sidelist"
+            div.innerText="-"+name
+            div.setAttribute("onclick","chooseList(this)")
+            let x=document.createElement("span")
+            x.className="deleteList"
+
+            x.innerText="X"
+            div.appendChild(x)
+            sidebar.insertBefore(div,plusSign)
+            })
         headerCreator()
         let target=document.getElementById("view")
-        let storage=JSON.parse(localStorage.listName)
+        let storage=JSON.parse(localStorage[current])
         for (item in storage){
             target.innerHTML+=storage[item]
             target.appendChild(document.createElement("hr"))
         }
+        sortByCreationTime()
     }
-    sortByCreationTime()
+    
     updateCounter()
 }
+document.addEventListener("click",function(e){
+    if(e.target.className=="deleteList"){deleteList(e)}
+})
 document.addEventListener("mousedown",function(e){
     let item=e.target.closest(".todoContainer")
     if (item===null||e.target.tagName=="BUTTON"||e.target.className=="more"||e.target.tagName=="INPUT"){return}
@@ -209,12 +234,12 @@ function addItem(){
         due.value=null
         //updating th counter
         updateCounter()
-        if (localStorage.listName==null){
-            localStorage.listName="{}"
+        if (localStorage[current]==null){
+            localStorage[current]="{}"
         }
-        let storage=JSON.parse(localStorage["listName"])
+        let storage=JSON.parse(localStorage[current])
         storage[input.value]=container.outerHTML
-        localStorage["listName"]=JSON.stringify(storage)
+        localStorage[current]=JSON.stringify(storage)
         input.value=""
         
         
@@ -379,9 +404,9 @@ function deleteItem(that){
         updateCounter()
     },200)
     //remove it from the localStorage
-    let storage=JSON.parse(localStorage.listName)
+    let storage=JSON.parse(localStorage[current])
     delete storage[key]
-    localStorage.listName=JSON.stringify(storage)
+    localStorage[current]=JSON.stringify(storage)
 }
 function toggleCheck(that){
     let item=that.parentElement.parentElement
@@ -395,4 +420,97 @@ function toggleCheck(that){
     let storage=JSON.parse(localStorage["listName"])
         storage[key]=item.outerHTML
         localStorage["listName"]=JSON.stringify(storage)
+}
+
+function searchTask(that){
+    let searchPool=document.querySelectorAll(".todoText")
+    let search=that.value
+    for (let i=0;i<searchPool.length;i++){
+        //if something was highlighted, clean it's inner html
+        searchPool[i].innerHTML=searchPool[i].innerHTML.replace(/<mark>|<\/mark>/g, "")
+        text=searchPool[i].innerHTML;
+        let index=text.indexOf(search)
+        //wrap matching phrases with the <mark> tag
+        if (index!==-1){
+            let start=text.slice(0,index)
+            let highlight=text.slice(index,index+search.length)
+            let end=text.slice(index+search.length)
+            searchPool[i].innerHTML=start+"<mark>"+highlight+"</mark>"+end
+        }
+    }
+}
+function createNewList(){
+    let inputs=document.querySelectorAll("input")
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].disabled=true
+        }
+        
+        let target=document.getElementById("view")
+        target.innerHTML=""
+        let txtLine=document.createElement("input")
+        let span=document.createElement("span")
+        span.innerText="NAME YOUR LIST: "
+        
+        let buuton=document.createElement("button")
+        buuton.innerText="LET'S GO"
+        buuton.className="sortbutton"
+        buuton.setAttribute("onclick","createList(this)")
+        target.appendChild(span)
+        target.appendChild(txtLine)
+        target.appendChild(buuton)
+}
+function createList(that){
+    let name=that.previousElementSibling.value
+    let sidebar=document.getElementById("sidebar")
+    let plusSign=document.getElementById("newList")
+    if (name!==""){
+        if (Object.keys(localStorage).indexOf(name)===-1){
+            let div=document.createElement("div")
+            div.className="sidelist"
+            div.innerText="-"+name
+            div.setAttribute("onclick","chooseList(this)")
+            let x=document.createElement("span")
+            x.className="deleteList"
+            x.innerText="X"
+            div.appendChild(x)
+            sidebar.insertBefore(div,plusSign)
+        }
+        localStorage[name]="{}"
+        current=name
+        let inputs=document.querySelectorAll("input")
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].disabled=false
+        }
+        document.getElementById("view").innerHTML=""
+        headerCreator()
+    }
+}
+
+function chooseList(that){
+    let target=document.getElementById("view")
+    let key=that.innerText.slice(1,that.innerText.length-2)
+    let pool=JSON.parse(localStorage[key])
+    current=key
+    view.innerHTML=""
+    headerCreator()
+    for (task in pool){
+        view.innerHTML+=pool[task]
+        view.appendChild(document.createElement("hr"))
+    }
+    
+}
+function deleteList(e){
+    e.stopPropagation()
+    let key=e.target.parentElement.innerText.slice(1,e.target.parentElement.innerText.length-2)
+    let box=e.target.parentElement
+    let userAnswer=window.confirm("Are you sure you want to delete "+key+"?")
+    if (userAnswer){
+        box.remove()
+        localStorage.removeItem(key)
+        let otherList=document.querySelector(".sidelist")
+        if(otherList===null){
+            createNewList()
+        }
+        else{chooseList(otherList)}
+    }
 }
