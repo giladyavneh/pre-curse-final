@@ -11,6 +11,12 @@ div{
     /*border: solid black;*/
     
 }
+button{
+    cursor: pointer;
+}
+input{
+    border-color: var(--txt-color1);
+}
 body{
     background-color:var(--bg-color);
     font-family: Arial, Helvetica, sans-serif;
@@ -46,6 +52,20 @@ body{
     padding: 10px;
     text-align: center;
 }
+#wrapper #main #container #control #dueTime{
+    width: 100px;
+}
+#wrapper #main #container #control label{
+    font-size: 12px;
+}
+#wrapper #main #container #control button{
+    font-weight: bold;
+}
+#wrapper #main #container #control #prioritySelector{
+    background-color: var(--items-color);
+    color: var(--txt-color1);
+    border-color: var(--txt-color1);
+}
 #wrapper #main #container #view{
     min-height: 50vh;
     background-color: ghostwhite;
@@ -69,7 +89,7 @@ body{
     text-align: center;
 }
 
-#wrapper #main #container #view .todoContainer .todoCreatedAt{
+#wrapper #main #container #view .todoContainer .todoCreatedAt, #wrapper #main #container #view .todoContainer .todoCreatedFor{
     font-size: 0.5em;
     text-align: center;
 }
@@ -104,4 +124,36 @@ body{
     background-color: var(--items-color);
     color: var(--txt-color1);
 }
-
+#wrapper #main #sidebar {
+    min-width: 145px;
+}
+#wrapper #main #sidebar #searchbar{
+    padding:10px;
+}
+#wrapper #main #sidebar #searchbar span{
+    font-size: 10px;
+    color: var(--txt-color1);
+}
+#wrapper #main #sidebar #searchbar input{
+    width: 90%;
+}
+.side{
+    min-height: 30px;
+}
+#wrapper #main #sidebar #sortheader{
+    font-weight: bold;
+    color: var(--txt-color1);
+    padding: 3px;
+    font-size: 10px;
+}
+#wrapper #main #sidebar #sortbar{
+    display: flex;
+    justify-content: center;
+}
+.sortbutton{
+    background-color: var(--items-color);
+    border: solid 1px var(--txt-color1);
+    color: var(--txt-color1);
+    margin: 0px;
+    padding: 3px 3px;
+}
