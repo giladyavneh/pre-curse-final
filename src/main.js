@@ -15,7 +15,7 @@ function load(){
 }
 document.addEventListener("mousedown",function(e){
     let item=e.target.closest(".todoContainer")
-    if (item===null||e.target.tagName=="BUTTON"||e.target.className=="more"){return}
+    if (item===null||e.target.tagName=="BUTTON"||e.target.className=="more"||e.target.tagName=="INPUT"){return}
     else{
         document.addEventListener("mousemove",mousemove)
         
@@ -117,9 +117,9 @@ document.addEventListener("mousedown",function(e){
                 }
             }
             for(let i=0;i<kids.length;i++)(
-                kids[i].style.transform="translateX(0px)"
+                kids[i].removeAttribute("style")
             )
-            item.style.opacity=1
+            item.removeAttribute("style")
             clone.remove()
         }
     }
@@ -155,6 +155,7 @@ function addItem(){
         done.className="done"
         let check=document.createElement("input")
         check.type="checkbox"
+        check.setAttribute("onchange","toggleCheck(this)")
         done.appendChild(check)
         container.appendChild(done)
         //creating the todo text div
@@ -213,7 +214,6 @@ function addItem(){
         }
         let storage=JSON.parse(localStorage["listName"])
         storage[input.value]=container.outerHTML
-        console.log(storage)
         localStorage["listName"]=JSON.stringify(storage)
         input.value=""
         
@@ -383,4 +383,16 @@ function deleteItem(that){
     delete storage[key]
     localStorage.listName=JSON.stringify(storage)
 }
-
+function toggleCheck(that){
+    let item=that.parentElement.parentElement
+    let key=item.querySelector(".todoText").innerText
+    if(that.checked){
+        item.classList.add("checked")
+    }
+    else{
+        item.classList.remove("checked")
+    }
+    let storage=JSON.parse(localStorage["listName"])
+        storage[key]=item.outerHTML
+        localStorage["listName"]=JSON.stringify(storage)
+}
