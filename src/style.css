@@ -138,12 +138,24 @@ body{
     font-size: 10px;
     color: var(--txt-color1);
 }
-#wrapper #main #sidebar #searchbar input{
-    width: 90%;
+#wrapper #main #sidebar #searchbar input[type=search]{
+    width: 85%;
+}
+#wrapper #main #sidebar #searchbar input[type=image]{
+    width: 8%;
 }
 .side{
     min-height: 30px;
 }
+.sidelist{
+    min-height: 30px;
+    border:solid 1px var(--txt-color1);
+    color: var(--txt-color1); padding: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+}
+
 #wrapper #main #sidebar #sortheader{
     font-weight: bold;
     color: var(--txt-color1);
@@ -199,6 +211,14 @@ body{
     border-color: var(--bg-color);
     color:var(--bg-color)
 }*/
+#wrapper #main #sidebar #newList{
+    padding: 5px;
+    direction: rtl;
+    cursor: pointer;
+}
+#wrapper #main #sidebar #newList img{
+    width: 30px;
+}
 .checked{
     opacity: 0.5;
 }
@@ -209,4 +229,11 @@ body{
     background-color: gray;
     height: 3px;
     top:10px;
+}
+.deleteList{
+    position: absolute;
+    top:0px;
+    right: 0px;
+    font-size: 10px;
+    color: var(--txt-color1);
 }
