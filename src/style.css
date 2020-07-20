@@ -148,7 +148,7 @@ body{
 }
 #wrapper #main #sidebar #sortbar{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 .sortbutton{
     background-color: var(--items-color);
@@ -156,4 +156,42 @@ body{
     color: var(--txt-color1);
     margin: 0px;
     padding: 3px 3px;
+}
+
+.sortradio::after{
+    content: "Priority";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
+    
+    height: 25px;
+    background-color: var(--items-color);
+    border: solid 1px var(--txt-color1);
+    color: var(--txt-color1);
+    margin: 0px;
+    padding: 3px 3px;
+    text-align: center;
+}
+#sortButton{
+    width: 50px;
+}
+#sortButton:after{
+    content: "Priority";
+}
+#sortCreationButton{
+    width: 55px;
+}
+#sortCreationButton:after{
+    content: "creation Time";
+}
+#sortDueButton{
+    width: 50px;
+}
+#sortDueButton:after{
+    content: "Due Time";
+}
+.sortradio:checked:after{
+    border-color: var(--bg-color);
+    color:var(--bg-color)
 }
