@@ -50,7 +50,7 @@ function addItem(){
         container.appendChild(todoCreatedAt)
         //creating the due time element
         let dueTime=document.createElement("div")
-        dueTime.className="todoCreatedAt"
+        dueTime.className="todoCreatedFor"
         dueTime.innerText=due.value==""?"--":`${due.value.split("T")[0]}
         ${due.value.split("T")[1]}`
         container.appendChild(dueTime)
@@ -77,6 +77,7 @@ function addItem(){
         target.appendChild(container)
         target.appendChild(document.createElement("hr"))
         input.value=""
+        due.value=null
         //updating th counter
         updateCounter()
     }
@@ -88,13 +89,20 @@ function turnDateToNumber(stamp){
     //turning the inner text to a list of numbers(as strings)
     let nums=stamp.innerHTML.match(/\d+(?=(-|:|<br>|$))/g)
     let result=0
-    //adding the numbers, giving more importance to bigger time units by multypling by exponents of 10
+    //adding the numbers, giving more importance to bigger time units by multypling by exponents of 10 or 60
     for (let i=0;i<nums.length;i++){
-        let n=parseInt(nums[i])*(10**(nums.length-i))
+        let n
+        if (i>2){
+            n=parseInt(nums[i])*(60**(nums.length-i))
+        }
+        else{
+            n=parseInt(nums[i])*(10**(nums.length-i))
+        }
         result+=n
     }
     return result
 }
+
 //function for creating the list headers, because when the list is modified
 //it's more simple the erase it all and reconstuct it
 //the same header needed to be generated each time
@@ -131,6 +139,7 @@ function sortByPriority(){
         target.appendChild(document.createElement("hr"))
     })
 }
+
 function showMore(e){
     let button=e.target
     let item=button.parentElement
@@ -147,4 +156,55 @@ function showMore(e){
         menu.style.transform="translateX(100px)"
         item.style.transform="translateX(-100px)"
     }
+}
+
+function sortByCreationTime(){
+    const target=document.getElementById("view")
+    let kids=target.children
+    let repo=[]
+    //creating an array with all list objects
+    for (let i=0;i<kids.length;i++){
+        if (kids[i].querySelector(".todoCreatedAt")!=null){
+            repo.push(kids[i])
+        }   
+    }
+    //sorting the array by the value inside "todoCreatedAt" div with turnDateToNumberFunction I made
+    repo.sort(function(a, b){return turnDateToNumber(a.querySelector(".todoCreatedAt"))-turnDateToNumber(b.querySelector(".todoCreatedAt"))})
+    //empty the list and recostuct it with the new sorted list
+    target.innerHTML=""
+    headerCreator()
+    repo.forEach(function(elem){
+        target.appendChild(elem)
+        target.appendChild(document.createElement("hr"))
+    })
+}
+
+function sortByDueTime(){
+    const target=document.getElementById("view")
+    let kids=target.children
+    let repo=[]
+    let noDue=[]
+    //creating an array with all list items that have a due time
+    //creating another list of items without due time, to be appended seperatly.
+    for (let i=0;i<kids.length;i++){
+        if (kids[i].querySelector(".todoCreatedFor")!==null&&kids[i].querySelector(".todoCreatedFor").innerText!=="--"){
+            repo.push(kids[i])
+        }
+        else if(kids[i].querySelector(".todoCreatedAt")!=null){
+            noDue.push(kids[i])
+        }   
+    }
+    //sorting the array by the value inside "todoCreatedFor" div with turnDateToNumberFunction I made
+    repo.sort(function(a, b){return turnDateToNumber(a.querySelector(".todoCreatedFor"))-turnDateToNumber(b.querySelector(".todoCreatedFor"))})
+    //empty the list and recostuct it with the new sorted list
+    target.innerHTML=""
+    headerCreator()
+    repo.forEach(function(elem){
+        target.appendChild(elem)
+        target.appendChild(document.createElement("hr"))
+    })
+    noDue.forEach(function(elem){
+        target.appendChild(elem)
+        target.appendChild(document.createElement("hr"))
+    })
 }
