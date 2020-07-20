@@ -199,3 +199,14 @@ body{
     border-color: var(--bg-color);
     color:var(--bg-color)
 }*/
+.checked{
+    opacity: 0.5;
+}
+.checked::after{
+    content: "";
+    width:100%;
+    position: absolute;
+    background-color: gray;
+    height: 3px;
+    top:10px;
+}
