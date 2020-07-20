@@ -42,10 +42,15 @@
                     SORT BY: 
                 </div>
                 <div id="sortbar" class="side">
+                    <button class="sortbutton" id="sortButton" onclick="sortByPriority()">Priority</button>
+                    <button class="sortbutton" onclick="sortByCreationTime()">Creation Time</button>
+                    <button class="sortbutton" onclick="sortByDueTime()">Due Time</button>
+                </div>
+                <!--<div id="sortbar" class="side">
                     <input type="radio" name="sort" class="sortradio" id="sortCreationButton" onclick="sortByCreationTime()" checked>
                     <input type="radio" name="sort" class="sortradio" id="sortDueButton" onclick="sortByDueTime()">
                     <input type="radio" name="sort" class="sortradio" id="sortButton" onclick="sortByPriority()">
-                </div>
+                </div>-->
                 
             </div>
         </div>
