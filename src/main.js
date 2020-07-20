@@ -3,7 +3,7 @@ document.onload=load()
 
 function load(){
     if (localStorage.length===0){
-        createNewList()
+        //createNewList()
     }
     else{
         let lists=Object.keys(localStorage)
@@ -497,6 +497,7 @@ function chooseList(that){
         view.innerHTML+=pool[task]
         view.appendChild(document.createElement("hr"))
     }
+    updateCounter()
     
 }
 function deleteList(e){
