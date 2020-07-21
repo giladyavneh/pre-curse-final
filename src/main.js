@@ -216,7 +216,8 @@ function addItem() {
         //creating the due time element
         let dueTime = document.createElement("div");
         dueTime.className = "todoCreatedFor";
-        dueTime.innerText = due.value == "" ? "--" : `${due.value.split("T")[0]}${due.value.split("T")[1]}`;
+        dueTime.innerText = due.value == "" ? "--" : `${due.value.split("T")[0]}
+        ${due.value.split("T")[1]}`;
         container.appendChild(dueTime);
         //creating the 'more' button
         let more = document.createElement("div");

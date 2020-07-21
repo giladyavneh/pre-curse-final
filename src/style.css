@@ -89,7 +89,7 @@ body{
     text-align: center;
 }
 
-.todoContainer .todoCreatedAt, #wrapper #main #container #view .todoContainer .todoCreatedFor{
+.todoContainer .todoCreatedAt, .todoContainer .todoCreatedFor{
     font-size: 0.5em;
     text-align: center;
 }
