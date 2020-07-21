@@ -23,7 +23,7 @@ function load() {
         div.appendChild(x);
         sidebar.insertBefore(div, plusSign);
     });
-    //applyiing the firat list to the view section
+    //applyiing the first list to the view section
     headerCreator();
     let target = document.getElementById("view");
     let storage = JSON.parse(localStorage[current]);

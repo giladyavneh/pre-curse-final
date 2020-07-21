@@ -133,3 +133,6 @@ In this section I am going to present some of the key features of my project, us
 
 -Last but not least, there is a multy list option. Using the blue plus sign a new list can be created. You can toggle between the lists or delete any of them. Those list are conssitent, and will be saved on the browser local storage.
 ![multy list gif](multylist.gif)
+
+-A short video about me, my overall experience with the task, and a little elaboration about certain code features.
+https://drive.google.com/file/d/1LJ-vjv7G11zueldlH7WjQaViHn-dDC8T/view?usp=sharing
