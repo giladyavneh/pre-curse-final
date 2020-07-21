@@ -7,10 +7,6 @@ body, div, span, img, li, ul, input, label, h1{
     --txt-color1:white;
     --items-color:#97caef;
 }
-div{
-    /*border: solid black;*/
-    
-}
 button{
     cursor: pointer;
 }
