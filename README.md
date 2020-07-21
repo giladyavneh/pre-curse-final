@@ -111,5 +111,11 @@ $ npm run test
 -Add link to the PR you created in your private repo here, fill the other details
 
 ## Media
--the self genrated gif.
+In this section I am going to present some of the key features of my project, using GIFs. The usage of local storage however, is not well presented with GIFs, so on that I will elaborate in the video attached on the bottom of that section. I will also talk about my self, a little bit about the code logic, and on my over all experience.
+
+-The self genrated gif.
 ![automatic gif](ui-testing-recording.gif)
+
+-The list can be sorted by the items' time of creation (that's the default), by priority (as required), or by the due time of them, which one can set with the datetime HTML input I added.
+![sorting gif](sorting.gif)
+
