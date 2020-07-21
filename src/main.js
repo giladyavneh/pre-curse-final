@@ -2,10 +2,11 @@ let current;
 document.onload = load();
 
 function load() {
+    //creating a new list, in case you dony have any
     if (localStorage.length === 0) {
         localStorage["New List"] = "{}";
-        //createNewList()
     }
+    //reacraeting the list from the local storage
     let lists = Object.keys(localStorage);
     current = lists[0];
     let sidebar = document.getElementById("sidebar");
@@ -22,6 +23,7 @@ function load() {
         div.appendChild(x);
         sidebar.insertBefore(div, plusSign);
     });
+    //applyiing the firat list to the view section
     headerCreator();
     let target = document.getElementById("view");
     let storage = JSON.parse(localStorage[current]);
@@ -37,6 +39,8 @@ document.addEventListener("click", function (e) {
         deleteList(e);
     }
 });
+
+//the drag and rearange function
 document.addEventListener("mousedown", function (e) {
     let item = e.target.closest(".todoContainer");
     if (
@@ -48,8 +52,9 @@ document.addEventListener("mousedown", function (e) {
         return;
     } else {
         document.addEventListener("mousemove", mousemove);
-
         let view = document.getElementById("view");
+        //deviding the list to whatever is above the selected object, and below it.
+        //relevant to the animation
         let kids = [...view.children];
         let lowerclass = [];
         let upperclass = [];
@@ -62,6 +67,7 @@ document.addEventListener("mousedown", function (e) {
                 }
             }
         }
+        //creating a movable clone of the desired object
         let mesurments = item.getBoundingClientRect();
         let x = e.clientX;
         let y = e.clientY;
@@ -78,6 +84,7 @@ document.addEventListener("mousedown", function (e) {
         let movers = [];
 
         function mousemove(e) {
+            //the clone following the mouse
             let top = clone.getBoundingClientRect().top;
             movers = top < mesurments.top ? upperclass : lowerclass;
             let dx = e.clientX - x;
@@ -86,7 +93,8 @@ document.addEventListener("mousedown", function (e) {
             clone.style.top = top + dy + "px";
             x = e.clientX;
             y = e.clientY;
-
+            //detemet for each item if it moves up or down, according to it's position relatively to the original item
+            //each item will move acording to its position relatively to the clone's position
             if (top < mesurments.top) {
                 for (let i = 0; i < upperclass.length; i++) {
                     let data = upperclass[i].getBoundingClientRect();
@@ -100,9 +108,7 @@ document.addEventListener("mousedown", function (e) {
                 for (let i = 0; i < lowerclass.length; i++) {
                     let data = lowerclass[i].getBoundingClientRect();
                     if (clone.getBoundingClientRect().bottom > data.bottom) {
-                        lowerclass[i].style.transform = `translateY(-${
-              data.height + 15
-            }px)`;
+                        lowerclass[i].style.transform = `translateY(-${data.height + 15}px)`;
                     } else {
                         lowerclass[i].style.transform = `translateY(0px)`;
                     }
@@ -114,7 +120,7 @@ document.addEventListener("mousedown", function (e) {
             document.removeEventListener("mouseup", mouserelease);
             document.removeEventListener("mousemove", mousemove);
             let top = clone.getBoundingClientRect().top;
-
+            //pushing the item to the elements' list according to where it have been droped
             if (movers.length != 0) {
                 for (let i = 0; i < movers.length; i++) {
                     let data = movers[i].getBoundingClientRect().top;
@@ -126,6 +132,7 @@ document.addEventListener("mousedown", function (e) {
                         break;
                     }
                 }
+                //recreating the view section with the new ordered list
                 view.innerHTML = "";
                 headerCreator();
                 if (upperclass.length != 0) {
@@ -151,7 +158,7 @@ document.addEventListener("mousedown", function (e) {
         }
     }
 });
-
+//counting the elements on the list, omiting the "hr" elements
 function updateCounter() {
     let counter = document.getElementById("counter");
     let items = document.getElementById("view").children.length;
@@ -161,6 +168,7 @@ function updateCounter() {
         counter.innerText = 0;
     }
 }
+//submiting a task with the ENTER key
 document.getElementById("textInput").addEventListener("keypress", function (e) {
     if (e.keyCode === 13) {
         addItem();
@@ -202,19 +210,13 @@ function addItem() {
         let todoCreatedAt = document.createElement("div");
         todoCreatedAt.className = "todoCreatedAt";
         let now = new Date();
-        todoCreatedAt.innerText = `${now.getFullYear()}-${
-      now.getMonth() + 1
-    }-${now.getDate()}
+        todoCreatedAt.innerText = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}
         ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
         container.appendChild(todoCreatedAt);
         //creating the due time element
         let dueTime = document.createElement("div");
         dueTime.className = "todoCreatedFor";
-        dueTime.innerText =
-            due.value == "" ?
-            "--" :
-            `${due.value.split("T")[0]}
-        ${due.value.split("T")[1]}`;
+        dueTime.innerText = due.value == "" ? "--" : `${due.value.split("T")[0]}${due.value.split("T")[1]}`;
         container.appendChild(dueTime);
         //creating the 'more' button
         let more = document.createElement("div");
@@ -231,7 +233,6 @@ function addItem() {
         del.className = "delete";
         del.innerText = "DELETE";
         del.setAttribute("onclick", "deleteItem(this)");
-
         let edit = document.createElement("button");
         edit.className = "edit";
         edit.innerText = "EDIT";
@@ -244,6 +245,7 @@ function addItem() {
         due.value = null;
         //updating th counter
         updateCounter();
+        //updating the local storage
         if (localStorage[current] == null) {
             localStorage[current] = "{}";
         }
@@ -314,7 +316,7 @@ function sortByPriority() {
         target.appendChild(document.createElement("hr"));
     });
 }
-
+//slides the item left to reveal thedelete button, and back right to concil it
 function showMore(that) {
     let button = that;
     let item = button.parentElement;
@@ -432,7 +434,7 @@ function deleteItem(that) {
     delete storage[key];
     localStorage[current] = JSON.stringify(storage);
 }
-
+//giving the checked item the "checked" class, or removing the class on unchecking
 function toggleCheck(that) {
     let item = that.parentElement.parentElement;
     let key = item.querySelector(".todoText").innerText;
@@ -441,6 +443,7 @@ function toggleCheck(that) {
     } else {
         item.classList.remove("checked");
     }
+    //update the local storage, so the task will stay checked
     let storage = JSON.parse(localStorage["listName"]);
     storage[key] = item.outerHTML;
     localStorage["listName"] = JSON.stringify(storage);
@@ -469,16 +472,16 @@ function searchTask(that) {
 
 function createNewList() {
     let inputs = document.querySelectorAll("input");
+    //disabeling all inputs, to not break the code
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].disabled = true;
     }
-
+    //creating th "list maker" ui
     let target = document.getElementById("view");
     target.innerHTML = "";
     let txtLine = document.createElement("input");
     let span = document.createElement("span");
     span.innerText = "NAME YOUR LIST: ";
-
     let buuton = document.createElement("button");
     buuton.innerText = "LET'S GO";
     buuton.className = "sortbutton";
@@ -493,6 +496,7 @@ function createList(that) {
     let sidebar = document.getElementById("sidebar");
     let plusSign = document.getElementById("newList");
     if (name !== "") {
+        //if there is no list with the same name, create a new list entery on the side bar
         if (Object.keys(localStorage).indexOf(name) === -1) {
             let div = document.createElement("div");
             div.className = "sidelist";
@@ -504,17 +508,20 @@ function createList(that) {
             div.appendChild(x);
             sidebar.insertBefore(div, plusSign);
         }
+        //update the local storage and choosing the curent list
         localStorage[name] = "{}";
         current = name;
+        //reseting the page
         let inputs = document.querySelectorAll("input");
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].disabled = false;
         }
         document.getElementById("view").innerHTML = "";
         headerCreator();
+        updateCounter()
     }
 }
-
+//changing the displayed list to the one chosen
 function chooseList(that) {
     let target = document.getElementById("view");
     let key = that.innerText.slice(1, that.innerText.length - 2);
@@ -530,12 +537,16 @@ function chooseList(that) {
 }
 
 function deleteList(e) {
+    //stopping the bubbling procces, so the the deleted list button won't be clicked
+    //this is importent because by the time the click event would be fired on the button...
+    //the list will be long gone, and the code will break
     e.stopPropagation();
     let key = e.target.parentElement.innerText.slice(
         1,
         e.target.parentElement.innerText.length - 2
     );
     let box = e.target.parentElement;
+    //dialog box, asks the user to confirm his action
     let userAnswer = window.confirm(
         "Are you sure you want to delete " + key + "?"
     );
