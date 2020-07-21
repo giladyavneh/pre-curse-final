@@ -119,3 +119,17 @@ In this section I am going to present some of the key features of my project, us
 -The list can be sorted by the items' time of creation (that's the default), by priority (as required), or by the due time of them, which one can set with the datetime HTML input I added.
 ![sorting gif](sorting.gif)
 
+-Each item has a little "more" button on it's right side. Pressing it slides it left or right, revealing or conciling the delete button, which nicely fades out the deleted item. The edit button is there too. Unfortunatly, due to the tight schedule, it remained without function, but it looks nice, so I left it for now.
+![deleting gif](deleting.gif)
+
+-Of course marking tasks as checked is an option. The task will remain checked upon refreshing or traversing between lists.
+![checking gif](checking.gif)
+
+-One of the main chalenges was creating a Drag&Drop mechanism, that will also look nice and smooth. The result however is pretty nice looking.
+![drag and drop gif](drag.gif)
+
+-You can also search for a specific phrase in your current tasks list with the search bar.
+![search gif](search.gif)
+
+-Last but not least, there is a multy list option. Using the blue plus sign a new list can be created. You can toggle between the lists or delete any of them. Those list are conssitent, and will be saved on the browser local storage.
+![multy list gif](multylist.gif)
