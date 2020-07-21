@@ -102,6 +102,14 @@ $ npm run test
 
 
 ## Submitting
- - When your ready to submit run `RECORD_TEST=true npm run test` (Can take up to 3-4 min) that will create `ui-testing-recording.gif` that will show your app during testing session - push this file as well 
- - Create a Pull Request from the new brunch into master in your duplicated repository
- - add username: f4s-master, email: ? as collaborators to your imported repo.
+-When you are ready to submit run on windows $env:RECORD_TEST='true'; npm run test, on mac RECORD_TEST=true npm run test (Can take up to 3-4 min) that will create ui-testing-recording.gif that will show your app during testing session - push this file as well
+-Add ui-testing-recording.gif to the README.md file under this section, if you want you can add another gif if you feel the auto-generated one not beautiful enough
+-Record a 5 min selfie video, describe yourself in a few words, talk about the project you submit - try to explain how your app works. Think about this video as an interview
+-Upload the 5 min video to the cloud (google drive) and add here (README.md) the public link for the video (can be located under the gif)
+-Create a Pull Request from the new brunch you created in the Instructions into master in your duplicated repository
+-add Github usernames: GuySerfaty, fainir and tomeryp as collaborators to your imported repo.
+-Add link to the PR you created in your private repo here, fill the other details
+
+## Media
+-the self genrated gif.
+![automatic gif](ui-testing-recording.gif)
