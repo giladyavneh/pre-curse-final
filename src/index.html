@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="main.js" defer></script>
+    <title>Just Do It</title>
+</head>
+<body>
+    <div id= wrapper>
+        <div id="header">
+            <h1>JustDoIt.</h1>
+        </div>
+        <div id="main">
+            <div id="container">
+                <section id="control">
+                    <span id="counter"></span>
+                    <span>WHAT'S NEXT: </span>
+                    <input id="textInput">
+                    <select name="prioritySelector" id="prioritySelector">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <label>
+                        SET DUE TIME:
+                        <input type="datetime-local" id="dueTime">
+                    </label>
+                    <button id="addButton" class="sortbutton" onclick="addItem()">ADD</button>
+                </section>
+                <section id="view"></section>
+            </div>
+            <div id="sidebar">
+                <div id="searchbar" class="side">
+                    <span>SEARCH TASK:</span> 
+                    <input type="search" oninput="searchTask(this)">
+                    <input type="image" src="https://image.flaticon.com/icons/svg/2948/2948272.svg">
+                </div>
+                <div id="sortheader">
+                    SORT BY: 
+                </div>
+                <div id="sortbar" class="side">
+                    <button class="sortbutton" id="sortButton" onclick="sortByPriority()">Priority</button>
+                    <button class="sortbutton" onclick="sortByCreationTime()">Creation Time</button>
+                    <button class="sortbutton" onclick="sortByDueTime()">Due Time</button>
+                </div>
+                <div id="newList" class="side">
+                    <img src="https://image.flaticon.com/icons/svg/1004/1004733.svg" onclick="createNewList()">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

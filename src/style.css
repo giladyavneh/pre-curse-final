@@ -1,0 +1,198 @@
+body, div, span, img, li, ul, input, label, h1{
+    margin:0px;
+    padding:0px;
+}
+:root{
+    --bg-color:#cafafe;
+    --txt-color1:white;
+    --items-color:#97caef;
+}
+button{
+    cursor: pointer;
+}
+input{
+    border-color: var(--txt-color1);
+}
+hr{
+    transition: ease-in-out 200ms;
+}
+body{
+    background-color:var(--bg-color);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+#wrapper{
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
+}
+#wrapper #header{
+    text-align: center;
+    background-color: var(--items-color);
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+#wrapper #header h1{
+    
+    font-size: 90px;
+    color: var(--txt-color1);
+}
+#wrapper #main{
+    display: flex;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: var(--items-color);
+}
+#wrapper #main #container{
+    width:80%;
+}
+#wrapper #main #container #control{
+    color:var(--txt-color1);
+    padding: 10px;
+    text-align: center;
+}
+#wrapper #main #container #control #dueTime{
+    width: 100px;
+}
+#wrapper #main #container #control label{
+    font-size: 12px;
+}
+#wrapper #main #container #control button{
+    font-weight: bold;
+}
+#wrapper #main #container #control #prioritySelector{
+    background-color: var(--items-color);
+    color: var(--txt-color1);
+    border-color: var(--txt-color1);
+}
+#wrapper #main #container #view{
+    min-height: 50vh;
+    background-color: ghostwhite;
+    padding: 10px 5%;
+}
+#wrapper #main #sidebar{
+    background-color: var(--items-color);
+    width: 20%;
+    border-radius: 10px;
+}
+.todoContainer, #wrapper #main #container #view #thead{
+    display: grid;
+    grid-template-columns: 5% auto 5% 10% 10%;
+    transition: ease-in-out 200ms;
+    position: relative;
+    padding: 5px;
+    background-color: ghostwhite;
+    width:100%;
+}
+#wrapper #main #container #view #thead div{
+    font-size: 8px;
+    text-align: center;
+}
+
+.todoContainer .todoCreatedAt, .todoContainer .todoCreatedFor{
+    font-size: 0.5em;
+    text-align: center;
+}
+.todoContainer .priority{
+   text-align: center;
+}
+.todoContainer .more{
+    position: absolute;
+    right:-5px;
+    padding:5px;
+}
+.todoContainer .menu{
+    position:absolute;
+    overflow: hidden;
+    right:0px;
+    transition:ease-in-out 200ms;
+    max-width: 0px;
+    white-space: nowrap;
+}
+.todoContainer .menu button{
+    font-size: 10px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    height:25px;
+}
+.todoContainer .menu .delete{
+    background-color: red;
+    color:white;
+}
+.todoContainer .menu .edit{
+    background-color: var(--items-color);
+    color: var(--txt-color1);
+}
+#wrapper #main #sidebar {
+    min-width: 145px;
+}
+#wrapper #main #sidebar #searchbar{
+    padding:10px;
+}
+#wrapper #main #sidebar #searchbar span{
+    font-size: 10px;
+    color: var(--txt-color1);
+}
+#wrapper #main #sidebar #searchbar input[type=search]{
+    width: 85%;
+}
+#wrapper #main #sidebar #searchbar input[type=image]{
+    width: 8%;
+}
+.side{
+    min-height: 30px;
+}
+.sidelist{
+    min-height: 30px;
+    border:solid 1px var(--txt-color1);
+    color: var(--txt-color1); padding: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+}
+
+#wrapper #main #sidebar #sortheader{
+    font-weight: bold;
+    color: var(--txt-color1);
+    padding: 3px;
+    font-size: 10px;
+}
+#wrapper #main #sidebar #sortbar{
+    display: flex;
+    justify-content: space-evenly;
+}
+.sortbutton{
+    background-color: var(--items-color);
+    border: solid 1px var(--txt-color1);
+    color: var(--txt-color1);
+    margin: 0px;
+    padding: 3px 3px;
+}
+
+#wrapper #main #sidebar #newList{
+    padding: 5px;
+    direction: rtl;
+    cursor: pointer;
+}
+#wrapper #main #sidebar #newList img{
+    width: 30px;
+}
+.checked{
+    opacity: 0.5;
+}
+.checked::after{
+    content: "";
+    width:100%;
+    position: absolute;
+    background-color: gray;
+    height: 3px;
+    top:10px;
+}
+.deleteList{
+    position: absolute;
+    top:0px;
+    right: 0px;
+    font-size: 10px;
+    color: var(--txt-color1);
+}

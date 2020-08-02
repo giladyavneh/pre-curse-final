@@ -16,7 +16,7 @@ Goal (only functionality):
  - Clone your new repository to your computer
  - Install [node+npm](https://nodejs.org/en/download/)
  - Install the project dependencies by running npm install from the project's directory (using a terminal)
- - [Create new brunch](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/managing-branches)
+ - Create new brunch
  - Change the project to meet the requirements
  - [Commit Early, Push Often](https://www.worklytics.co/commit-early-push-often/) - your work might be evaluated by your push history
  - Good Luck!
@@ -82,17 +82,13 @@ $ npm run test
 - Add a counter element to reflect the **current** number of todos stored in the app. This element should have a id `counter`.
 
 - Add a button with id `sortButton`. Clicking this element should resort the todo list by their todos priority (DESC)
-
   ![alt text](./readme-files/todo-bonus.gif)
 
 
 
 ## Bonus
-- Add a new feature/s - any cool functionality you want to add to the app
-- https://htmldom.dev/drag-and-drop-element-in-a-list
-- Make the TODO list consistent - consider use [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-- Add a way to search tasks
-- Deploy your app to the internet ! using https://vercel.com/ add a link to your deployed app here (README.md)
+1. Add a new feature - any cool functionality you want to add to the app
+2. (Super bonus) - Add a test to the new feature
 
 
 
@@ -106,12 +102,37 @@ $ npm run test
 
 
 ## Submitting
- - When you are ready to submit run on windows `$env:RECORD_TEST='true'; npm run test`, on mac `RECORD_TEST=true npm run test` (Can take up to 3-4 min) that will create `ui-testing-recording.gif` that will show your app during testing session - push this file as well
- - Add `ui-testing-recording.gif` to the README.md file under this section, if you want you can add another gif if you feel the auto-generated one not beautiful enough
- - Record a 5 min selfie video, describe yourself in a few words, talk about the project you submit - try to explain how your app works. Think about this video as an interview
- - Upload the 5 min video to the cloud (google drive) and add here (README.md) the public link for the video (can be located under the gif)
- - [Create a Pull Request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request) from the new brunch you created in the Instructions into master in your duplicated repository
- - add Github usernames: GuySerfaty, fainir and tomeryp as [collaborators](https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/inviting-collaborators-to-a-personal-repository) to your imported repo.
- - Add link to the PR you created in your private repo [here](https://docs.google.com/spreadsheets/d/1P9_YDGqIqmV10fvTmIXc_AGV0_ycI2aBFo2h5zprUMI/edit#gid=1903529310), fill the other details
+-When you are ready to submit run on windows $env:RECORD_TEST='true'; npm run test, on mac RECORD_TEST=true npm run test (Can take up to 3-4 min) that will create ui-testing-recording.gif that will show your app during testing session - push this file as well
+-Add ui-testing-recording.gif to the README.md file under this section, if you want you can add another gif if you feel the auto-generated one not beautiful enough
+-Record a 5 min selfie video, describe yourself in a few words, talk about the project you submit - try to explain how your app works. Think about this video as an interview
+-Upload the 5 min video to the cloud (google drive) and add here (README.md) the public link for the video (can be located under the gif)
+-Create a Pull Request from the new brunch you created in the Instructions into master in your duplicated repository
+-add Github usernames: GuySerfaty, fainir and tomeryp as collaborators to your imported repo.
+-Add link to the PR you created in your private repo here, fill the other details
 
- GOOD LUCK!
+## Media
+In this section I am going to present some of the key features of my project, using GIFs. The usage of local storage however, is not well presented with GIFs, so on that I will elaborate in the video attached on the bottom of that section. I will also talk about my self, a little bit about the code logic, and on my over all experience.
+
+-The self genrated gif.
+![automatic gif](ui-testing-recording.gif)
+
+-The list can be sorted by the items' time of creation (that's the default), by priority (as required), or by the due time of them, which one can set with the datetime HTML input I added.
+![sorting gif](sorting.gif)
+
+-Each item has a little "more" button on it's right side. Pressing it slides it left or right, revealing or conciling the delete button, which nicely fades out the deleted item. The edit button is there too. Unfortunatly, due to the tight schedule, it remained without function, but it looks nice, so I left it for now.
+![deleting gif](deleting.gif)
+
+-Of course marking tasks as checked is an option. The task will remain checked upon refreshing or traversing between lists.
+![checking gif](checking.gif)
+
+-One of the main chalenges was creating a Drag&Drop mechanism, that will also look nice and smooth. The result however is pretty nice looking.
+![drag and drop gif](drag.gif)
+
+-You can also search for a specific phrase in your current tasks list with the search bar.
+![search gif](search.gif)
+
+-Last but not least, there is a multy list option. Using the blue plus sign a new list can be created. You can toggle between the lists or delete any of them. Those list are conssitent, and will be saved on the browser local storage.
+![multy list gif](multylist.gif)
+
+-A short video about me, my overall experience with the task, and a little elaboration about certain code features.
+https://drive.google.com/file/d/1LJ-vjv7G11zueldlH7WjQaViHn-dDC8T/view?usp=sharing
